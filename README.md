@@ -20,14 +20,14 @@ checks, stores historical data, and sends alerts on anomalies.
 
 ## Requirements
 
-- Python 3.12+
+- Python 3.13+
 - [uv](https://github.com/astral-sh/uv) package manager
 
 ## Setup
 
 ```bash
 # Clone the repository
-git clone 
+git clone REPO_URL_HERE
 cd seo-monitor
 
 # Install dependencies
@@ -44,6 +44,8 @@ cp .env.example .env
 TBD — will be documented as CLI commands are implemented.
 
 ## Project Structure
+
+```
 seo-monitor/
 ├── src/seo_monitor/   # Main package
 ├── tests/             # Unit tests
@@ -52,6 +54,7 @@ seo-monitor/
 ├── data/              # SQLite database (gitignored)
 ├── GEMINI.md          # AI assistant project guide
 └── pyproject.toml     # Project config and dependencies
+```
 
 ## License
 
