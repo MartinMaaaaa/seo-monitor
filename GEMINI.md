@@ -112,10 +112,23 @@ Detected problems per snapshot.
 - `id` (PK), `snapshot_id` (FK), `rule_code`, `severity`, `message`,
   `detected_at`
 
-### `alerts` (later)
-Dispatched notifications log.
+**Severity Levels:**
+- `critical`: Complete failure (e.g., `PARSE_FAILED`, 4xx/5xx status codes).
+- `warning`: Critical SEO field missing (e.g., `MISSING_TITLE`, `MISSING_H1`).
+- `info`: Field exists but sub-optimal (e.g., `TITLE_TOO_LONG`, `DUPLICATE_CONTENT`).
 
 ## Workflow Expectations
+
+### Crawler Logic
+- **Sitemap**: Must support recursive parsing of `sitemap_index.xml`.
+- **Recursion**: Hard limit of 3 levels deep to prevent infinite loops.
+- **Formats**: Support standard `.xml` and gzipped `.xml.gz`.
+- **Fault Tolerance**: Single page failures (parsing or network) must not stop the batch; log as `critical` issues and continue.
+
+### Database Strategy
+- **Initialization**: Use an explicit `seo-monitor init-db` command.
+- **No Auto-create**: Runtime commands (like `crawl`) must fail loud if the database schema is not initialized.
+- **Migrations**: No Alembic for now; schema changes require manual `reset-db` during MVP.
 
 ### Before writing any module:
 1. Check if `docs/designs/<module>.md` exists
